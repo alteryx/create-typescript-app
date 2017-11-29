@@ -1,0 +1,11 @@
+{
+  "name": "tslint-config-typescript-app",
+  "version": "1.0.0",
+  "repository": "alteryx/create-typescript-app",
+  "files": [
+    "index.js"
+  ],
+  "description": "ESLint configuration used by Create Typescript App",
+  "main": "index.js",
+  "license": "MIT"
+}
