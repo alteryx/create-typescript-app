@@ -1,0 +1,7 @@
+{
+  "name": "ts-scripts",
+  "version": "1.0.0",
+  "description": "This package includes scripts and configuration used by Create Typescript App",
+  "main": "index.js",
+  "license": "MIT"
+}
