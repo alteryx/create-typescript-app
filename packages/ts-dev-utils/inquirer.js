@@ -7,6 +7,6 @@
 
 'use strict';
 
-var crossSpawn = require('cross-spawn');
+var inquirer = require('inquirer');
 
-module.exports = crossSpawn;
+module.exports = inquirer;

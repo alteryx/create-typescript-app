@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "jsx": "react",
+  }
+}

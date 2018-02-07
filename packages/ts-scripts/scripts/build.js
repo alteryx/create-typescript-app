@@ -17,10 +17,10 @@ const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const paths = require('../config/paths');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
-const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
-const printBuildError = require('react-dev-utils/printBuildError');
+const checkRequiredFiles = require('ts-dev-utils/checkRequiredFiles');
+const printHostingInstructions = require('ts-dev-utils/printHostingInstructions');
+const FileSizeReporter = require('ts-dev-utils/FileSizeReporter');
+const printBuildError = require('ts-dev-utils/printBuildError');
 
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
@@ -32,7 +32,7 @@ const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
 const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (!checkRequiredFiles([paths.appIndexJs])) {
   process.exit(1);
 }
 
@@ -43,9 +43,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
     fs.emptyDirSync(paths.appBuild);
-    // Merge with the public folder
-    copyPublicFolder();
-    // Start the webpack build
+    // Start the ts build
     return build(previousFileSizes);
   })
   .then(
@@ -135,12 +133,5 @@ function build(previousFileSizes) {
         warnings: messages.warnings,
       });
     });
-  });
-}
-
-function copyPublicFolder() {
-  fs.copySync(paths.appPublic, paths.appBuild, {
-    dereference: true,
-    filter: file => file !== paths.appHtml,
   });
 }
