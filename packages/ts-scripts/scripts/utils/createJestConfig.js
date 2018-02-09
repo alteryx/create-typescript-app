@@ -24,21 +24,26 @@ module.exports = (resolve, rootDir, srcRoots) => {
   // TODO: I don't know if it's safe or not to just use / as path separator
   // in Jest configs. We need help from somebody with Windows to determine this.
   const config = {
-    collectCoverageFrom: ['src/**/*.{js,jsx,mjs}'],
+    collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx,mjs}'],
     setupTestFrameworkScriptFile: setupTestsFile,
-    testRegex: '(/src/.*(\\.|/)(inttest|spec))\\.(tsx?)$',
+    // testRegex: '(/src/.*(\\.|/)(inttest|spec))\\.(tsx?)$',
     // where to search for files/tests
-    roots: srcRoots.map(toRelRootDir),
+    // roots: srcRoots.map(toRelRootDir),
+    testMatch: [
+      '<rootDir>/src/**/__tests__/**/*.ts?(x)',
+      '<rootDir>/src/**/?(*.)(spec|test).ts?(x)',
+    ],
     testEnvironment: 'node',
     testURL: 'http://localhost',
     transform: {
+      // '^.+\\.tsx?$': resolve('config/jest/typescriptTransform.js'),
       '^.+\\.tsx?$': resolve('config/jest/typescriptTransform.js'),
-      '^(?!.*\\.(js|jsx|mjs|css|json|graphql)$)': resolve(
-        'config/jest/fileTransform.js'
-      ),
+      // '^(?!.*\\.(js|jsx|mjs|css|json|graphql)$)': resolve(
+      //   'config/jest/fileTransform.js'
+      // ),
     },
     transformIgnorePatterns: [
-      '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$',
+      '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$',
       '^.+\\.module\\.css$',
     ],
     moduleNameMapper: {
@@ -56,7 +61,14 @@ module.exports = (resolve, rootDir, srcRoots) => {
       'jsx',
       'node',
     ],
+    globals: {
+      'ts-jest': {
+        tsConfigFile: paths.appTsConfig,
+      },
+    },
   };
+
+  console.log('rootDur', rootDir)
   if (rootDir) {
     config.rootDir = rootDir;
   }

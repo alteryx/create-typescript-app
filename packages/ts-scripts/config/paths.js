@@ -57,6 +57,8 @@ module.exports = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
+  appTsConfig: resolveApp('tsconfig.js'),
+  appTsLint: resolveApp('tslint.js'),
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
@@ -79,6 +81,8 @@ module.exports = {
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
+  appTsConfig: resolveOwn('config/tsconfig.json'),
+  appTsLint: resolveOwn('config/tslint.js'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
   // These properties only exist before ejecting:
@@ -87,8 +91,9 @@ module.exports = {
 };
 
 // detect if template should be used, ie. when cwd is react-scripts itself
+const relativeAppDirectory = fs.realpathSync(path.join(__dirname, '..'));
 const useTemplate =
-  appDirectory === fs.realpathSync(path.join(__dirname, '..'));
+  appDirectory === relativeAppDirectory
 
 checkForMonorepo = !useTemplate;
 
@@ -101,6 +106,8 @@ if (useTemplate) {
     appSrc: resolveOwn('template/src'),
     yarnLockFile: resolveOwn('template/yarn.lock'),
     testsSetup: resolveOwn('template/src/setupTests.js'),
+    appTsConfig: resolveOwn('tsconfig.json'),
+    appTsLint: resolveOwn('tslint.js'),
     appNodeModules: resolveOwn('node_modules'),
     publicUrl: getPublicUrl(resolveOwn('package.json')),
     servedPath: getServedPath(resolveOwn('package.json')),

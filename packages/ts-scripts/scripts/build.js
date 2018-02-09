@@ -18,10 +18,11 @@ const chalk = require('chalk');
 const fs = require('fs-extra');
 const paths = require('../config/paths');
 const checkRequiredFiles = require('ts-dev-utils/checkRequiredFiles');
-const printHostingInstructions = require('ts-dev-utils/printHostingInstructions');
 const FileSizeReporter = require('ts-dev-utils/FileSizeReporter');
 const printBuildError = require('ts-dev-utils/printBuildError');
-
+const config = require('../config/webpack.config.prod');
+const webpack = require('webpack');
+const formatWebpackMessages = require('ts-dev-utils/formatWebpackMessages');
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
@@ -79,13 +80,13 @@ measureFileSizesBeforeBuild(paths.appBuild)
       const publicUrl = paths.publicUrl;
       const publicPath = config.output.publicPath;
       const buildFolder = path.relative(process.cwd(), paths.appBuild);
-      printHostingInstructions(
-        appPackage,
-        publicUrl,
-        publicPath,
-        buildFolder,
-        useYarn
-      );
+      // printHostingInstructions(
+      //   appPackage,
+      //   publicUrl,
+      //   publicPath,
+      //   buildFolder,
+      //   useYarn
+      // );
     },
     err => {
       console.log(chalk.red('Failed to compile.\n'));

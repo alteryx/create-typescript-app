@@ -15,6 +15,7 @@
     "eslintFormatter.js",
     "errorOverlayMiddleware.js",
     "FileSizeReporter.js",
+    "formatWebpackMessages.js",
     "printBuildError.js",
     "getProcessForPort.js",
     "ignoredFiles.js",

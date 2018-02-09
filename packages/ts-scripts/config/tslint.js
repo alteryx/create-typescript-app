@@ -1,0 +1,11 @@
+module.exports = {
+  "extends": [
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "import-name": [
+      false
+    ]
+  }
+}

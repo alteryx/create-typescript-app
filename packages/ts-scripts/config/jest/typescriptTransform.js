@@ -8,6 +8,5 @@
 // @remove-on-eject-end
 'use strict';
 
-const tsJest = require('ts-jest');
-
-module.exports = tsJest;
+const tsJestPreprocessor = require('ts-jest/preprocessor');
+module.exports = tsJestPreprocessor;
